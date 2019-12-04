@@ -1,0 +1,20 @@
+apply plugin: 'java-library'
+apply plugin: 'java'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.slf4j:slf4j-nop:1.7.6"
+    implementation "com.alibaba:easyexcel:2.1.3"
+    implementation "io.reactivex.rxjava2:rxjava:2.2.12"
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+//  解决build警告：编码GBK的不可映射字符
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+sourceCompatibility = "8"
+targetCompatibility = "8"
