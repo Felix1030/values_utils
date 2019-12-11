@@ -2,7 +2,7 @@ package com.felix.values.utils.constant;
 
 /**
  * @author Felix
- * @date 2019-12-02.
+ * date on 2019-12-02.
  * GitHub：https://github.com/Felix1030
  * email：felix.hua@mchain.pro
  * description：
@@ -38,6 +38,10 @@ public class ResourcesConstants {
     public static final String RESOURCE_STRING_SUFFIX = "</string>";
     // Resources strings Item标签结束带换行
     public static final String RESOURCE_STRING_SUFFIX_NEWLINE = RESOURCE_STRING_SUFFIX + RESOURCE_NEWLINE;
+    // Resources strings 导出的Excel文件名称
+    public static final String RESOURCE_STRING_EXPORT_FILE_NAME = "LanguageExcel.xlsx";
+    // Resources strings 导入的Excel文件名称
+    public static final String RESOURCE_STRING_IMPORT_FILE_NAME = RESOURCE_STRING_EXPORT_FILE_NAME;
 
     // Resources arrays文件名称
     public static final String RESOURCE_ARRAY_NAME = "arrays.xml";
@@ -61,4 +65,12 @@ public class ResourcesConstants {
     public static final String RESOURCE_ARRAY_END_TAG_NEWLINE = RESOURCE_ARRAY_END_TAG + RESOURCE_NEWLINE;
     // Resources arrays 数据拼接符号
     public static final String RESOURCE_ARRAY_LINK_SYMBOL = "=";
+    // Resources arrays 导出的Excel名称
+    public static final String RESOURCE_ARRAY_EXPORT_NAME = "Code.xlsx";
+    // Resources arrays 导入的Excel名称
+    public static final String RESOURCE_ARRAY_IMPORT_NAME = RESOURCE_ARRAY_EXPORT_NAME;
+
+    // 导入或者导出文件结尾
+    public static final String EXCEL_SUFFIX_XLSX = ".xlsx";
+    public static final String EXCEL_SUFFIX_XLS = ".xls";
 }

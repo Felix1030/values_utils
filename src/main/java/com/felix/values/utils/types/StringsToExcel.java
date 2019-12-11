@@ -1,5 +1,6 @@
 package com.felix.values.utils.types;
 
+import com.felix.values.utils.constant.ResourcesConstants;
 import com.felix.values.utils.utils.ExcelUtils;
 
 import java.io.BufferedReader;
@@ -13,9 +14,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import static com.felix.values.utils.constant.ResourcesConstants.RESOURCE_STRING_NAME;
+
 /**
  * @author Felix
- * @date 2019-11-28.
+ * date on 2019-11-28.
  * GitHub：https://github.com/Felix1030
  * email：felix.hua@mchain.pro
  * description：
@@ -60,6 +63,41 @@ public class StringsToExcel {
                 "LanguageExcel.xlsx",
                 data, exportHeaders);
     }
+
+
+    /**
+     * strings文件导出到excel
+     *
+     * @param stringsBasePath android res目录
+     * @param exportExcelPath 导出的excel文件目录
+     * @param exportExcelName 导出的excel文件名称
+     */
+    public static void exportStringsToExcel(
+            String stringsBasePath,
+            String exportExcelPath,
+            String exportExcelName
+    ) {
+        LinkedList<File> values = initValuesFiles(stringsBasePath);
+
+        List<String> exportHeaders = new ArrayList<>();
+        exportHeaders.add(ResourcesConstants.RESOURCE_STRING_KEY_HEADER);
+        for (File result : values) {
+            System.out.println(result.getAbsolutePath());
+            exportHeaders.add(result.getName());
+        }
+        LinkedList<File> needFiles = initValuesNeededFile(values, RESOURCE_STRING_NAME);
+        // 读取Strings中参数
+        LinkedList<LinkedHashMap<String, String>> maps = initStringsKeyAndValue(needFiles);
+
+        // 获取导出的数据
+        LinkedList<LinkedList<String>> data = initExcelDatas(maps, exportHeaders);
+
+        ExcelUtils.exportExcel(
+                exportExcelPath,
+                exportExcelName,
+                data, exportHeaders);
+    }
+
 
     private static List<String> head() {
         List<String> list = new ArrayList<String>();
@@ -176,7 +214,7 @@ public class StringsToExcel {
      *
      * @param file
      */
-    public static boolean checkValuesFile(File file) {
+    private static boolean checkValuesFile(File file) {
         if (file == null) return false;
         String fileName = file.getName();
         return fileName.startsWith(VALUES_PREFIX) && file.isDirectory();

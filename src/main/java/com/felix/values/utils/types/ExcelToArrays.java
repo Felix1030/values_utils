@@ -17,7 +17,7 @@ import static com.felix.values.utils.constant.ResourcesConstants.RESOURCE_ARRAY_
 
 /**
  * @author Felix
- * @date 2019-12-03.
+ * date on 2019-12-03.
  * GitHub：https://github.com/Felix1030
  * email：felix.hua@mchain.pro
  * description：
@@ -44,6 +44,45 @@ public class ExcelToArrays {
                     if (baseFolderName.equals(RESOURCE_ARRAY_CODE_HEADER)) continue;
                     // 7.调用具体的生成逻辑
                     generateResourcesArraysFile(arrayCode, baseFolderName, writeBasePath, arrayName);
+                }
+            }
+
+            @Override
+            public void onException(Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * 导入Excel到Arrays
+     *
+     * @param importExcelPath     文件路径
+     * @param importExcelName     文件名称
+     * @param arraysWriteBasePath arrays生成的路径
+     * @param arraysName          生成的arrays 对应的名称
+     */
+    public static void importExcelToArrays(
+            String importExcelPath,
+            String importExcelName,
+            String arraysWriteBasePath,
+            String arraysName) {
+        // 1.读取Excel文件数据
+        ExcelUtils.readExcelData(importExcelPath + importExcelName, new OnValuesReadWithHeaderListener() {
+            @Override
+            public void onFinish(List<Map<Integer, String>> dataList, Map<Integer, String> headMap) {
+                // 2.转换读取到的Excel数据到对应的需要生成Arrays的Key Values格式
+                LinkedList<LinkedHashMap<String, String>> generateData = convertExcelToGenerateArraysCode(dataList, headMap.size());
+                // 3.生成arraysCode文件
+                for (int i = 0; i < generateData.size(); i++) {
+                    // 4.要生成文件中的Key Values
+                    LinkedHashMap<String, String> arrayCode = generateData.get(i);
+                    // 5.获取要生成文件的Base 路径 默认为每列的Header
+                    String baseFolderName = headMap.get(i);
+                    // 6.过滤掉不需要导入的部分  如果是Key的那一列不需要生成文件
+                    if (baseFolderName.equals(RESOURCE_ARRAY_CODE_HEADER)) continue;
+                    // 7.调用具体的生成逻辑
+                    generateResourcesArraysFile(arrayCode, baseFolderName, arraysWriteBasePath, arraysName);
                 }
             }
 

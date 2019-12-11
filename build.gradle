@@ -18,3 +18,32 @@ tasks.withType(JavaCompile) {
 
 sourceCompatibility = "8"
 targetCompatibility = "8"
+
+ext {
+    libraryPackaging = 'aar'                                            //上传aar形式的打包文件
+
+    // jcenter
+    bintrayRepo = "values_utils"                                             // 你上传的位于bintray中的Repository名称，如果没有创建会有一个叫maven的
+    name = 'values_utils'                                                // 必须和library module的名字相同
+    libraryDesc = '提供Strings、arrays文件导出到Excel或者反向导入'
+    publishedGroupId = 'com.felix.values.utils'                // 填写groupId， 一般是包名，比如：com.android.support
+    versionName = '1.0.0'                                               // 版本号，比如：22.2.1
+    websiteUrl = 'https://github.com/Felix1030/values_utils'              // 可以填写github上的库地址.
+    issueTrackerUrl = 'https://github.com/Felix1030/values_utils/issues'  // 可以填写github库的issue地址.
+    vcsUrl = 'https://github.com/Felix1030/values_utils.git'              // 可以填写github上库的地址.
+    licenseName = "Apache-2.0"
+    libraryVersionDesc = 'version descriotion'
+
+    // maven
+    artifact = 'values_utils'                                            // 必须和library module的名字相同
+    libraryName = 'values_utils'
+    developerId = 'felix1030'
+    developerName = 'felix1030'
+    developerEmail = 'hxydevlop@gmail.com'
+    licenseName = 'APSL-2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+
+}
+apply from: 'android-maven-install.gradle'
+apply from: 'android-tasks.gradle'
+apply from: 'bintray.gradle'

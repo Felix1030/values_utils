@@ -17,7 +17,7 @@ import static com.felix.values.utils.constant.ResourcesConstants.RESOURCE_STRING
 
 /**
  * @author Felix
- * @date 2019-11-28.
+ * date on 2019-11-28.
  * GitHub：https://github.com/Felix1030
  * email：felix.hua@mchain.pro
  * description：
@@ -50,6 +50,44 @@ public class ExcelToStrings {
                     if (parentFolderName.equals(RESOURCE_STRING_KEY_HEADER)) continue;
                     // 6.生成文件
                     generateResourcesFileByMap(linkedHashMap, writeBasePath, parentFolderName);
+                }
+            }
+
+            @Override
+            public void onException(Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * excel文件导入到Strings
+     *
+     * @param importExcelPath
+     * @param importExcelName
+     * @param writeStringsBasePath
+     */
+    public static void importExcelToStrings(String importExcelPath,
+                                            String importExcelName,
+                                            String writeStringsBasePath) {
+//        String excelPath = "/Users/vincent/Downloads/export/LanguageExcel.xlsx";
+        // 代表写入的父路径 写入时会拼上 xml header/文件名
+//        String writeBasePath = "/Users/vincent/Desktop/workspace/PagingTest/app/src/main/res";
+        // 1 读取Excel
+        ExcelUtils.readExcelData(importExcelPath + importExcelName, new OnValuesReadWithHeaderListener() {
+            @Override
+            public void onFinish(List<Map<Integer, String>> dataList, Map<Integer, String> headMap) {
+                // 2.转换Excel到可生成Strings的Kay Values文件
+                List<LinkedHashMap<String, String>> linkedHashMaps = convertExcelDataToGenerate(dataList, headMap.size());
+                for (int i = 0; i < linkedHashMaps.size(); i++) {
+                    // 3.获取单列的Key Value数据
+                    LinkedHashMap<String, String> linkedHashMap = linkedHashMaps.get(i);
+                    // 4.获取生成文件的Base Folder
+                    String parentFolderName = headMap.get(i);
+                    // 5.过滤掉Key哪一列
+                    if (parentFolderName.equals(RESOURCE_STRING_KEY_HEADER)) continue;
+                    // 6.生成文件
+                    generateResourcesFileByMap(linkedHashMap, writeStringsBasePath, parentFolderName);
                 }
             }
 

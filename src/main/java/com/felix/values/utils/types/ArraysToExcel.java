@@ -23,7 +23,7 @@ import static com.felix.values.utils.utils.ResourcesUtils.getFilterResourcesFile
 
 /**
  * @author Felix
- * @date 2019-12-02.
+ * date on 2019-12-02.
  * GitHub：https://github.com/Felix1030
  * email：felix.hua@mchain.pro
  * description：
@@ -52,7 +52,30 @@ public class ArraysToExcel {
         ExcelUtils.exportExcel(exportPath, "Code.xlsx", arraysExportExcelData, allHeaders);
     }
 
-    public static void exportArraysToExcel() {
+    /**
+     * 导出Arrays文件到Excel
+     *
+     * @param arraysParentPath res级别目录
+     * @param arraysExportId   导出的ArraysID
+     * @param exportExcelPath  生成Excel文件的地址
+     * @param exportExcelName  默认为Code.xml
+     */
+    public static void exportArraysToExcel(String arraysParentPath,
+                                           String arraysExportId,
+                                           String exportExcelPath,
+                                           String exportExcelName) {
+        // 1.获取所有Values文件
+        LinkedList<File> allValuesFolder = getAllValuesFolder(arraysParentPath);
+        // 2.配置以及获取所有Header
+        LinkedList<String> allHeaders = getAllHeadersFile(allValuesFolder, RESOURCE_ARRAY_CODE_HEADER);
+        // 3.获取所有符合条件的文件
+        LinkedList<File> filterResourcesFileList = getFilterResourcesFileList(allValuesFolder, RESOURCE_ARRAY_NAME);
+        // 4.读取文件中数据
+        LinkedList<LinkedHashMap<String, String>> linkedHashMaps = initAllFilesArraysCodes(filterResourcesFileList, arraysExportId);
+        // 5.读取到的arrays数据转换为导出excel需要的数据
+        LinkedList<LinkedList<String>> arraysExportExcelData = convertArraysCodesToExcelData(linkedHashMaps);
+        // 6.执行导出
+        ExcelUtils.exportExcel(exportExcelPath, exportExcelName, arraysExportExcelData, allHeaders);
 
     }
 
