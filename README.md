@@ -18,8 +18,8 @@
 ```xml
 <dependency>
     <groupId>com.felix.values.utils</groupId>
-	<artifactId>values_utils</artifactId>
-	<version>1.0.0</version>
+    <artifactId>values_utils</artifactId>
+    <version>1.0.0</version>
 </dependency>
 ```
 
