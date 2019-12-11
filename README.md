@@ -13,6 +13,21 @@
 ## 简介
 [Values_utils](https://github.com/Felix1030/values_utils) 采用 `Java` 语言编写的项目，项目代码结构清晰并且有详细注释，如有任何疑问和建议请提 [Issues](https://github.com/Felix1030/values_utils/issues) 或联系 qq： **675579354** ，**项目会持续迭代维护，努力打造一款好用的插件**。
 
+## Maven
+
+```xml
+<dependency>
+    <groupId>com.felix.values.utils</groupId>
+	<artifactId>values_utils</artifactId>
+	<version>1.0.0</version>
+</dependency>
+```
+
+## Gradle via JCenter
+
+``` groovy
+implementation 'com.felix.values.utils:values_utils:1.0.0'
+```
 
 ## Thanks
 
