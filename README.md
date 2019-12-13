@@ -25,15 +25,6 @@
 
 #### 三、功能介绍
 
-#### 四、Q&A
-1. "Program type already present: org.apache.xmlbeans.xml.stream.Location"
-    这个是由于easyexcel 引用org.apache.poi包下引用xmlbeans-2.6.0.jar导致的冲突
-    解决方式使用如下引用即可
-``` groovy
-implementation ('com.felix.values.utils:values_utils:1.0.0') {
-   exclude group:'org.apache.poi'
-}
-```
     
 ## Maven
 
@@ -41,19 +32,14 @@ implementation ('com.felix.values.utils:values_utils:1.0.0') {
 <dependency>
     <groupId>com.felix.values.utils</groupId>
     <artifactId>values_utils</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.5</version>
 </dependency>
 ```
 
 ## Gradle via JCenter
 
 ``` groovy
-implementation 'com.felix.values.utils:values_utils:1.0.0'
-```
-``` groovy
-implementation ('com.felix.values.utils:values_utils:1.0.0') {
-   exclude group:'org.apache.poi'
-}
+implementation 'com.felix.values.utils:values_utils:1.0.5'
 ```
 
 ## Thanks
