@@ -13,19 +13,6 @@
 ## 简介
 [Values_utils](https://github.com/Felix1030/values_utils) 采用 `Java` 语言编写的项目，项目代码结构清晰并且有详细注释，如有任何疑问和建议请提 [Issues](https://github.com/Felix1030/values_utils/issues) 或联系 qq： **675579354** ，**项目会持续迭代维护，努力打造一款好用的插件**。
 
-#### 一、功能介绍
-1. **支持多strings文件导出到Excel文件**
-2. **支持多arrays文件导出到Excel文件(目前仅支持单个strings-arrays导出)**
-3. **支持Excel文件导入多strings文件**
-4. **支持Excel文件导入多arrays文件(目前仅支持单个strings-arrays导入)**
-
-#### 二、应用
-1. **Android国际化strings翻译**
-1. **Android国际化arrays 错误码翻译**
-
-#### 三、功能介绍
-
-    
 ## Maven
 
 ```xml
@@ -41,6 +28,48 @@
 ``` groovy
 implementation 'com.felix.values.utils:values_utils:1.0.5'
 ```
+
+#### 一、功能介绍
+1. **支持多strings文件导出到Excel文件**
+2. **支持多arrays文件导出到Excel文件(目前仅支持单个strings-arrays导出)**
+3. **支持Excel文件导入多strings文件**
+4. **支持Excel文件导入多arrays文件(目前仅支持单个strings-arrays导入)**
+
+#### 二、应用
+1. **Android国际化strings翻译**
+1. **Android国际化arrays 错误码翻译**
+
+#### 三、使用
+
+``` ValueState 本次执行的类型
+ValueState.STRINGS_TO_EXCEL 导出Strings到Excel
+ValueState.EXCEL_TO_STRINGS 导入excel到strings
+ValueState.ARRAYS_TO_EXCEL 导出Arrays到Excel 需要指定setArraysXmlKey
+ValueState.EXCEL_TO_ARRAYS 导入Excel到Arrays 需要指定setArraysXmlKey
+ValueState.NONE 啥也不干
+```
+
+``` kotlin
+fun main() {
+    ValueUtilsManagerBuilder(ValueState.STRINGS_TO_EXCEL)
+        .setImportAndExportPath("/Users/vincent/Desktop/workspace/Clock/resource/src/main/res") // 指定导出或者导入的路径
+        .setArraysXmlKey("clock_error_codes") // 指定arrays的Key 暂时不支持多Key
+        .build()
+        .execute()
+}
+```
+``` java
+public class GenerateJava {
+    public static void main(String[] args) {
+        new ValueUtilsManager.ValueUtilsManagerBuilder(ValueState.STRINGS_TO_EXCEL)
+                .setImportAndExportPath("/Users/vincent/Desktop/workspace/Clock/resource/src/main/res")
+                .setArraysXmlKey("clock_error_codes")
+                .build()
+                .execute();
+    }
+}
+```
+
 
 ## Thanks
 
