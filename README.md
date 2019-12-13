@@ -41,15 +41,17 @@ implementation 'com.felix.values.utils:values_utils:1.0.5'
 
 #### 三、使用
 
-``` ValueState 本次执行的类型
-ValueState.STRINGS_TO_EXCEL 导出Strings到Excel
-ValueState.EXCEL_TO_STRINGS 导入excel到strings
-ValueState.ARRAYS_TO_EXCEL 导出Arrays到Excel 需要指定setArraysXmlKey
-ValueState.EXCEL_TO_ARRAYS 导入Excel到Arrays 需要指定setArraysXmlKey
-ValueState.NONE 啥也不干
+``` 
+ValueState 本次执行的类型
+    ValueState.STRINGS_TO_EXCEL 导出Strings到Excel
+    ValueState.EXCEL_TO_STRINGS 导入excel到strings
+    ValueState.ARRAYS_TO_EXCEL 导出Arrays到Excel 需要指定setArraysXmlKey
+    ValueState.EXCEL_TO_ARRAYS 导入Excel到Arrays 需要指定setArraysXmlKey
+    ValueState.NONE 啥也不干
 ```
 
 ``` kotlin
+kotlin code
 fun main() {
     ValueUtilsManagerBuilder(ValueState.STRINGS_TO_EXCEL)
         .setImportAndExportPath("/Users/vincent/Desktop/workspace/Clock/resource/src/main/res") // 指定导出或者导入的路径
@@ -58,7 +60,8 @@ fun main() {
         .execute()
 }
 ```
-``` java
+``` 
+java code
 public class GenerateJava {
     public static void main(String[] args) {
         new ValueUtilsManager.ValueUtilsManagerBuilder(ValueState.STRINGS_TO_EXCEL)
